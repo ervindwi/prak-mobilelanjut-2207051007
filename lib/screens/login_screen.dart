@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'signup_screen.dart';
+import 'dashboard_screen.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
 
-  static const String route = '/loginScreen';
+  static const String route = '/login';
 
   @override
   State<LoginScreen> createState() => _LoginScreenState();
@@ -29,26 +30,23 @@ class _LoginScreenState extends State<LoginScreen> {
         child: SingleChildScrollView(
           padding: const EdgeInsets.symmetric(horizontal: 20),
           child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const SizedBox(height: 30),
-              // Top Text
-              Text(
-                "Welcome Back",
-                style: TextStyle(
-                  fontFamily: 'Raleway',
-                  fontSize: 32,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.black,
+              const SizedBox(height: 40),
+
+              // Logo
+              Center(
+                child: Image.asset(
+                  "assets/duit.png", // pastikan file ada di folder assets
+                  height: 80,
                 ),
               ),
-              const SizedBox(height: 8),
-              Text(
-                "Login to your account",
-                style: TextStyle(
-                  fontFamily: 'Raleway',
-                  fontSize: 16,
-                  color: Colors.grey,
-                ),
+              const SizedBox(height: 20),
+
+              // Header
+              const Text(
+                "Hi, Welcome Back to Justduit",
+                style: TextStyle(fontSize: 20, fontWeight: FontWeight.w600),
               ),
               const SizedBox(height: 30),
 
@@ -56,13 +54,11 @@ class _LoginScreenState extends State<LoginScreen> {
               TextField(
                 controller: _email,
                 decoration: InputDecoration(
-                  hintText: "Email",
-                  prefixIcon: Icon(Icons.email),
+                  labelText: "Email Address *",
+                  hintText: "Enter your email",
                   border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(30),
+                    borderRadius: BorderRadius.circular(8),
                   ),
-                  filled: true,
-                  fillColor: Colors.grey[200],
                 ),
               ),
               const SizedBox(height: 20),
@@ -72,13 +68,11 @@ class _LoginScreenState extends State<LoginScreen> {
                 controller: _password,
                 obscureText: true,
                 decoration: InputDecoration(
-                  hintText: "Password",
-                  prefixIcon: Icon(Icons.lock),
+                  labelText: "Password *",
+                  hintText: "Enter your password",
                   border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(30),
+                    borderRadius: BorderRadius.circular(8),
                   ),
-                  filled: true,
-                  fillColor: Colors.grey[200],
                 ),
               ),
               const SizedBox(height: 10),
@@ -88,67 +82,37 @@ class _LoginScreenState extends State<LoginScreen> {
                 alignment: Alignment.centerRight,
                 child: TextButton(
                   onPressed: () {},
+                  child: const Text("Forgot Password"),
+                ),
+              ),
+              const SizedBox(height: 10),
+
+              // Sign In Button
+              SizedBox(
+                width: double.infinity,
+                child: ElevatedButton(
+                  onPressed: () {
+                    // langsung masuk ke dashboard
+                    Navigator.pushNamedAndRemoveUntil(
+                      context,
+                      DashboardScreen.route,
+                      (route) => false,
+                    );
+                  },
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Colors.blue,
+                    padding: const EdgeInsets.symmetric(vertical: 16),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(8),
+                    ),
+                  ),
                   child: const Text(
-                    "Forgot Password?",
-                    style: TextStyle(fontSize: 12),
+                    "Sign in Now",
+                    style: TextStyle(fontSize: 16, color: Colors.white),
                   ),
                 ),
               ),
               const SizedBox(height: 20),
-
-              // Sign In Button
-              ElevatedButton(
-                onPressed: () {
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    const SnackBar(content: Text("Sign in tapped")),
-                  );
-                },
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.blue,
-                  padding:
-                      const EdgeInsets.symmetric(vertical: 14, horizontal: 100),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(30),
-                  ),
-                ),
-                child: const Text(
-                  "Sign In",
-                  style: TextStyle(fontSize: 18, color: Colors.white),
-                ),
-              ),
-              const SizedBox(height: 30),
-
-              // Divider
-              Row(
-                children: const [
-                  Expanded(child: Divider(thickness: 0.8)),
-                  Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 8.0),
-                    child: Text("or continue with"),
-                  ),
-                  Expanded(child: Divider(thickness: 0.8)),
-                ],
-              ),
-              const SizedBox(height: 30),
-
-              // Social Media Buttons
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  IconButton(
-                    onPressed: () {},
-                    icon: Image.asset("assets/google.png"),
-                    iconSize: 40,
-                  ),
-                  const SizedBox(width: 20),
-                  IconButton(
-                    onPressed: () {},
-                    icon: Image.asset("assets/apple.png"),
-                    iconSize: 40,
-                  ),
-                ],
-              ),
-              const SizedBox(height: 30),
 
               // Create new account
               Row(
@@ -166,9 +130,9 @@ class _LoginScreenState extends State<LoginScreen> {
                         fontWeight: FontWeight.bold,
                       ),
                     ),
-                  )
+                  ),
                 ],
-              )
+              ),
             ],
           ),
         ),
