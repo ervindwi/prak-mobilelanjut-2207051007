@@ -51,9 +51,6 @@ dev_dependencies:
 
 # The following section is specific to Flutter packages.
 flutter:
-  uses-material-design: true
-  assets:
-    - assets/duit.png
 
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in
@@ -61,8 +58,8 @@ flutter:
   uses-material-design: true
 
   # To add assets to your application, add an assets section, like this:
-  #assets:
-     #- assets/duit.png
+  assets:
+      - assets/duit.png
   #   - images/a_dot_burr.jpeg
   #   - images/a_dot_ham.jpeg
 

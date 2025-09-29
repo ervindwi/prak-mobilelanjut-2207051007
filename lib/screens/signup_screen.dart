@@ -27,103 +27,113 @@ class _SignupScreenState extends State<SignupScreen> {
 
   @override
   Widget build(BuildContext context) {
-    InputDecoration inputDecoration(String label, {Widget? suffixIcon}) =>
-        InputDecoration(
-          labelText: label,
+    InputDecoration inputDecoration(String label, String hint) => InputDecoration(
+          labelText: "$label *",
+          hintText: hint,
           border: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(12),
+            borderRadius: BorderRadius.circular(8),
           ),
-          filled: true,
-          fillColor: Colors.grey[200],
-          suffixIcon: suffixIcon,
         );
 
     return Scaffold(
+      backgroundColor: Colors.white,
       body: SafeArea(
         child: SingleChildScrollView(
-          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 30),
+          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              // Header text
-              Align(
-                alignment: Alignment.centerLeft,
-                child: Text(
-                  "Sign Up Now and Unlock the Power of JustOut",
-                  style: const TextStyle(
-                    fontSize: 20,
-                    fontWeight: FontWeight.w600,
-                  ),
+              const SizedBox(height: 20),
+
+              // Logo
+              Center(
+                child: Image.asset(
+                  "assets/duit.png", // ganti sesuai logo kamu
+                  height: 80,
+                ),
+              ),
+              const SizedBox(height: 20),
+
+              // Header
+              const Text(
+                "Sign Up Now and Unlock the Power of Justduit",
+                style: TextStyle(
+                  fontSize: 18,
+                  fontWeight: FontWeight.w600,
                 ),
               ),
               const SizedBox(height: 30),
 
-              // Input fields
-              Column(
-                children: [
-                  TextField(
-                    controller: _name,
-                    decoration: inputDecoration("Full Name"),
-                  ),
-                  const SizedBox(height: 14),
+              // Full Name
+              TextField(
+                controller: _name,
+                decoration: inputDecoration("Full Name", "Enter your full name"),
+              ),
+              const SizedBox(height: 16),
 
-                  TextField(
-                    controller: _email,
-                    keyboardType: TextInputType.emailAddress,
-                    decoration: inputDecoration("Email Address"),
-                  ),
-                  const SizedBox(height: 14),
+              // Email
+              TextField(
+                controller: _email,
+                decoration: inputDecoration("Email Address", "Enter your email"),
+              ),
+              const SizedBox(height: 16),
 
-                  TextField(
-                    controller: _password,
-                    obscureText: true,
-                    decoration: inputDecoration("Password"),
-                  ),
-                  const SizedBox(height: 14),
+              // Password
+              TextField(
+                controller: _password,
+                obscureText: true,
+                decoration: inputDecoration("Password", "Create a password"),
+              ),
+              const SizedBox(height: 16),
 
-                  TextField(
-                    controller: _confirmPassword,
-                    obscureText: true,
-                    decoration: inputDecoration("Confirm Password"),
-                  ),
-                  const SizedBox(height: 20),
+              // Confirm Password
+              TextField(
+                controller: _confirmPassword,
+                obscureText: true,
+                decoration:
+                    inputDecoration("Confirm Password", "Re-enter your password"),
+              ),
+              const SizedBox(height: 20),
 
-                  // Sign Up Button
-                  ElevatedButton(
-                    onPressed: () {
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        const SnackBar(content: Text("Sign up success!")),
-                      );
-                    },
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: Colors.blue,
-                      padding: const EdgeInsets.symmetric(
-                          vertical: 14, horizontal: 100),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(30),
-                      ),
-                    ),
-                    child: const Text(
-                      "Sign Up",
-                      style: TextStyle(fontSize: 18, color: Colors.white),
+              // Continue Button
+              SizedBox(
+                width: double.infinity,
+                child: ElevatedButton(
+                  onPressed: () {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      const SnackBar(content: Text("Sign up success!")),
+                    );
+                  },
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Colors.blue,
+                    padding: const EdgeInsets.symmetric(vertical: 16),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(8),
                     ),
                   ),
-                  const SizedBox(height: 30),
+                  child: const Text(
+                    "Continue",
+                    style: TextStyle(fontSize: 16, color: Colors.white),
+                  ),
+                ),
+              ),
+              const SizedBox(height: 20),
 
-                  // Already have account
-                  Center(
-                    child: TextButton(
-                      onPressed: () => Navigator.pushReplacementNamed(
-                        context,
-                        LoginScreen.route,
-                      ),
-                      child: const Text(
-                        "Sign In",
-                        style: TextStyle(fontSize: 13),
-                      ),
+              // Already have account
+              Center(
+                child: GestureDetector(
+                  onTap: () {
+                    Navigator.pushReplacementNamed(context, LoginScreen.route);
+                  },
+                  child: const Text(
+                    "Sign In",
+                    style: TextStyle(
+                      fontSize: 14,
+                      color: Colors.black87,
+                      decoration: TextDecoration.underline,
                     ),
                   ),
-                ],
+                ),
               ),
             ],
           ),
